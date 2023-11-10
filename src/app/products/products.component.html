@@ -1,0 +1,41 @@
+<bs-navbar></bs-navbar>
+
+
+  
+<div style="margin-top: 80px; margin-left: 20px;" class="row">
+    <div class="col-3">
+        <div class="sticky-top">
+            <ul class="list-group justify-content-center">
+                <form class="d-flex">
+                    <input class="form-control" type="search" placeholder="Search" aria-label="Search" #search>
+                    <button (click)='searchProduct(search.value)' class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+                <a class="list-group-item list-group-item-action" [class.active]="!category" routerLink="/" 
+                (click)="getProducts()" >
+                    All Categories</a>
+                <a  *ngFor="let c of categories" routerLink="/" [queryParams]="{category: c}"
+                    class="list-group-item list-group-item-action" [class.active]="category === c" (click)="getProductsByCategory(c)">
+                    {{c}}
+                </a>
+            </ul>
+        </div>
+    </div>
+    <div class="col">
+        <div class="row">
+            <ng-container *ngFor="let p of products; let i = index">
+                <div class="col">
+                    <product-card [product]="p"></product-card>
+                </div>
+                <div *ngIf="(i+1) % 2 === 0" class="w-100"></div>
+            </ng-container>
+        </div>
+    </div>
+    
+</div>
+<nav *ngIf="total >= 10" aria-label="Page navigation example">
+    <ul class="pagination pg-blue justify-content-center">
+    
+      <li *ngFor="let c of pages ; let i = index" class="page-item " [class.active]="pageNbr === i"><a routerLink="/" class="page-link" (click)="getPage(i)"  >{{i+1}}</a></li>
+    
+    </ul>
+  </nav>

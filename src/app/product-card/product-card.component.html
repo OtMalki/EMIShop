@@ -1,0 +1,28 @@
+<div class="card" style="width: 15rem;">
+    <img style="cursor: pointer;" (click)="open(content)" class="card-img-top" src="{{product.images[0]}}" alt="Card image cap">
+    <div class="card-body">
+        <h4 style="cursor: pointer;" (click)="open(content)" class="card-title">{{product.title}}</h4>
+        <p class="card-text">{{product.price | currency:'DH ':true}}</p>
+    </div>
+    <div class="card-footer">
+        <button
+        (click)="addToCart(product)" 
+        (click)="successNotification()" 
+        class="btn btn-primary btn-block">Add to cart</button>
+    </div>
+</div>
+
+<ng-template  #content let-c="close" let-d="dismiss">
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">{{product.title}}</h4>
+	</div>
+	<div class="modal-body">
+        <img  class="card-img-top" src="{{product.images[0]}}" alt="Card image cap">
+		<p>{{product.description}}</p>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-outline-dark" (click)="c('Save click')">Close</button>
+	</div>
+</ng-template>
+
+
